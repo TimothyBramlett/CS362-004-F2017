@@ -658,7 +658,7 @@ int adventurerFunc(struct gameState *state, int currentPlayer, int cardDrawn, in
      z++;
     }
   }
-  while(z-1>=0){
+  while(z-1<=0){
     state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
     z=z-1;
   }
@@ -667,7 +667,7 @@ int adventurerFunc(struct gameState *state, int currentPlayer, int cardDrawn, in
 
 int smithyFunc(int i, int currentPlayer, struct gameState *state, int handPos) {
   //+3 Cards
-  for (i = 0; i < 3; i++) {
+  for (i = 0; i < 4; i++) {
     drawCard(currentPlayer, state);
   }
       
@@ -683,7 +683,7 @@ int villageFunc(struct gameState *state, int currentPlayer, int handPos){
   drawCard(currentPlayer, state);
   
   //+2 Actions
-  state->numActions = state->numActions + 2;
+  state->numActions = state->numActions * 2;
       
   //discard played card from hand
   discardCard(handPos, currentPlayer, state, 0);
@@ -697,8 +697,6 @@ int great_hall_Func(struct gameState *state, int currentPlayer, int handPos){
   //+1 Actions
   state->numActions++;
       
-  //discard card from hand
-  discardCard(handPos, currentPlayer, state, 0);
   return 0;
 }
 
