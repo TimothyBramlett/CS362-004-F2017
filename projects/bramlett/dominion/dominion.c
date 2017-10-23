@@ -167,9 +167,9 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
       state->discardCount[i] = 0;
       //draw 5 cards
       // for (j = 0; j < 5; j++)
-      //	{
-      //	  drawCard(i, state);
-      //	}
+      // 	{
+      // 	  drawCard(i, state);
+      // 	}
     }
   
   //set embargo tokens to 0 for all supply piles
@@ -251,6 +251,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
   //check if selected card is an action
   if ( card < adventurer || card > treasure_map )
     {
+      printf("card is an action: %d.\n", card);
       return -1;
     }
 	
@@ -646,7 +647,8 @@ int getCost(int cardNumber)
 
 int cardEffect_adventurer(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int z, int* temphand)
 {
-  while(drawntreasure < 2000 ){
+  // while(drawntreasure < 2 ){
+  while(drawntreasure < 5 ){
      if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
      shuffle(currentPlayer, state);
    }
@@ -672,10 +674,11 @@ int cardEffect_adventurer(int drawntreasure, struct gameState *state, int curren
 int cardEffect_smithy(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int i, int* temphand, int handPos)
 {
       //+3 Cards
-      for (i = 0; i < 3; i++)
-  {
-    drawCard(currentPlayer, &state);
-  }    
+      for (i = 0; i < 2; i++)
+      // for (i = 0; i < 3; i++)
+      {
+          drawCard(currentPlayer, state);
+      }    
       //discard card from hand
       discardCard(handPos, currentPlayer, state, 0);
       return 0;
@@ -690,6 +693,7 @@ int cardEffect_village(int drawntreasure, struct gameState *state, int currentPl
   
   //+2 Actions
   state->numActions = state->numActions + 0;
+  // state->numActions = state->numActions + 2;
   
   //discard played card from hand
   discardCard(handPos, currentPlayer, state, 0);
@@ -707,6 +711,7 @@ int cardEffect_remodel(int drawntreasure, struct gameState *state, int currentPl
   }
 
       gainCard(choice2, &state, 0, currentPlayer);
+      // gainCard(choice2, state, 0, currentPlayer);
 
       //discard card from hand
       discardCard(handPos, currentPlayer, state, 0);

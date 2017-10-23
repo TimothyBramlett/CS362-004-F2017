@@ -282,6 +282,7 @@ int addCardToHand(int player, int card, struct gameState *game) {
     game->handCount[player]++;
     return SUCCESS;
   } else {
+    printf("%s\n", "failure.");
     return FAILURE;
   }
 
