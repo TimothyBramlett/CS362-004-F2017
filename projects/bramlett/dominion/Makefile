@@ -79,29 +79,34 @@ unittestresults.out: unittest1.c dominion.o rngs.o
 	./cardtest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
-# unittest1: unittest1.c dominion.o rngs.o
-# 	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
+randomtestresults.out: dominion.o rngs.o
+	clear
 
-# unittest2: unittest2.c dominion.o rngs.o
-# 	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
+	echo "randomtestcard1.c:" >> randomtestcard1.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 >> randomtestcard1.out
+	gcov dominion.c >> randomtestcard1.out
 
-# unittest3: unittest3.c dominion.o rngs.o interface.o
-# 	gcc -o unittest3 -g unittest3.c dominion.o rngs.o interface.o $(CFLAGS)
+	echo "randomtestcard2.c:" >> randomtestcard2.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestcard2.out
+	gcov dominion.c >> randomtestcard2.out
 
-# unittest4: unittest4.c dominion.o rngs.o interface.o
-# 	gcc -o unittest4 -g unittest4.c dominion.o rngs.o interface.o $(CFLAGS)
+	echo "randomtestcard3.c:" >> randomtestcard3.out
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard3 >> randomtestcard3.out
+	gcov dominion.c >> randomtestcard3.out
 
-# cardtest1: cardtest1.c dominion.c rngs.o interface.o
-# 	gcc -o cardtest1 -g cardtest1.c dominion.c rngs.o interface.o $(CFLAGS)
+	
 
-# cardtest2: cardtest2.c dominion.c rngs.o interface.o
-# 	gcc -o cardtest2 -g cardtest2.c dominion.c rngs.o interface.o $(CFLAGS)
+randomtestcard1: randomtestcard1.c dominion.c rngs.o interface.o
+	gcc -o randomtestcard1 randomtestcard1.c dominion.c rngs.o interface.o $(CFLAGS)
 
-# cardtest3: cardtest3.c dominion.c rngs.o interface.o
-# 	gcc -o cardtest3 -g cardtest3.c dominion.c rngs.o interface.o $(CFLAGS)
+randomtestcard2: randomtestcard2.c dominion.c rngs.o interface.o
+	gcc -o randomtestcard2 randomtestcard2.c dominion.c rngs.o interface.o $(CFLAGS)
 
-# cardtest4: cardtest4.c dominion.c rngs.o interface.o
-# 	gcc -o cardtest4 cardtest4.c dominion.c rngs.o interface.o $(CFLAGS)
+randomtestcard3: randomtestcard3.c dominion.c rngs.o interface.o
+	gcc -o randomtestcard3 randomtestcard3.c dominion.c rngs.o interface.o $(CFLAGS)
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
