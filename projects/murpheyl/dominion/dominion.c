@@ -658,7 +658,7 @@ int adventurerFunc(struct gameState *state, int currentPlayer, int cardDrawn, in
      z++;
     }
   }
-  while(z-1<=0){
+  while(z-1>=0){
     state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
     z=z-1;
   }
@@ -708,6 +708,8 @@ int outpostFunc(struct gameState *state, int currentPlayer, int handPos){
   discardCard(handPos, currentPlayer, state, 0);
   return 0;
 }
+
+
 
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
