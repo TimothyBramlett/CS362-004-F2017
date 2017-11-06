@@ -43,7 +43,7 @@ int main() {
     }
     */
 
-    //+1 Card, +2 Actions
+    //+2 Gold Cards
     if (returnValue != 0) returnValueErrors++;
     if (state.deckCount[currentPlayer] >= tempDeckCount) deckCountErrors++;
     if (state.handCount[currentPlayer] != (tempHandCount + 2)) handCountErrors++;

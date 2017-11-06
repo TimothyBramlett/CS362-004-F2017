@@ -37,7 +37,7 @@ int main() {
     
     returnValue = cardEffect(smithy, 0, 0, 0, &state, 0, 0);
 
-    //+1 Card, +2 Actions
+    //+3 Cards
     if (returnValue != 0) returnValueErrors++;
     if (state.deckCount[currentPlayer] != (tempDeckCount - 3)) deckCountErrors++;
     if (state.handCount[currentPlayer] != (tempHandCount + 2)) handCountErrors++;
