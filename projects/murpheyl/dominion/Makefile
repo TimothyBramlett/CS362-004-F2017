@@ -105,7 +105,7 @@ randomtestcard1.out: playdom player
 	echo "Coverage" >> randomtestcard1.out
 	echo "" >> randomtestcard1.out
 	gcov -b randomtestcard1.c >> randomtestcard1.out
-	gcov -b dominion.c >> randomtestcard1.out
+	gcov -b -f dominion.c >> randomtestcard1.out
 	echo "____________________________________________________________________________________________________" >> randomtestcard1.out
 	echo "randomtestcard1.c.gcov" >> randomtestcard1.out
 	echo "" >> randomtestcard1.out
@@ -122,7 +122,7 @@ randomtestcard2.out: playdom player
 	echo "Coverage" >> randomtestcard2.out
 	echo "" >> randomtestcard2.out
 	gcov -b randomtestcard2.c >> randomtestcard2.out
-	gcov -b dominion.c >> randomtestcard2.out
+	gcov -b -f dominion.c >> randomtestcard2.out
 	echo "____________________________________________________________________________________________________" >> randomtestcard2.out
 	echo "randomtestcard2.c.gcov" >> randomtestcard2.out
 	echo "" >> randomtestcard2.out
@@ -139,7 +139,7 @@ randomtestadventurer.out: playdom player
 	echo "Coverage" >> randomtestadventurer.out
 	echo "" >> randomtestadventurer.out
 	gcov -b randomtestadventurer.c >> randomtestadventurer.out
-	gcov -b dominion.c >> randomtestadventurer.out
+	gcov -b -f dominion.c >> randomtestadventurer.out
 	echo "____________________________________________________________________________________________________" >> randomtestadventurer.out
 	echo "randomtestadventurer.c.gcov" >> randomtestadventurer.out
 	echo "" >> randomtestadventurer.out
