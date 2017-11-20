@@ -1,0 +1,67 @@
+Number: 1
+Severity: Mild, yet spicy
+Title: Smithy function does not return proper number of cards
+Description: 
+
+While testing the smithy card with my unit tests I found that my tests failed.
+
+	cardtest1.c:
+	Testing smithy
+	-------------------------------
+	smithy: FAIL Smithy did not increase cards by 3
+	File 'dominion.c'
+	Lines executed:30.79% of 643
+	dominion.c:creating 'dominion.c.gcov'
+
+This led me to decide to investigate my teammates function more closely and in so doing I found the following code snippet:
+
+	int smithyFunc(int i, int currentPlayer, struct gameState *state, int handPos) {
+	  //+3 Cards
+	  for (i = 0; i < 4; i++) {
+	    drawCard(currentPlayer, state);
+	  }
+	      
+	  //discard card from hand
+	  discardCard(handPos, currentPlayer, state, 0);
+	  return 0;
+	}
+
+As you can see it looks like we have an off by one error where i is set to stop at 4 when it should be 3.  I reccomend this be corrected immeadiately.
+
+
+Number: 2
+Severity: Dangerously severe
+Title: Village card does not increase actions the correct amount
+Description: 
+
+While running my unit tests on the village card I discovered that my tests were failing:
+
+	cardtest3.c:
+	Testing village
+	-------------------------------
+	village: FAIL village did not increase cards properly
+	village: FAIL village did NOT increase actions by 2
+	File 'dominion.c'
+	Lines executed:32.97% of 643
+	dominion.c:creating 'dominion.c.gcov'
+
+I then looked in the code and found this:
+
+	int villageFunc(struct gameState *state, int currentPlayer, int handPos){
+
+	  //+1 Card
+	  drawCard(currentPlayer, state);
+	  
+	  //+2 Actions
+	  state->numActions = state->numActions * 2;
+	      
+	  //discard played card from hand
+	  discardCard(handPos, currentPlayer, state, 0);
+	  return 0;
+	}
+
+It looks like the numActions are being increased by being multiplied by 2.  This is incorrect.  They should be +2.  I reccomend this be corrected ASAP.
+
+
+
+
