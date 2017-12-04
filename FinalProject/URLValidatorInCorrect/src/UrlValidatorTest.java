@@ -266,6 +266,7 @@ public class UrlValidatorTest extends TestCase {
 	   }
    }
    
+   //programming based testing
    public void testAnyOtherUnitTest()
    {
 	   //This will output failed tests for valid URLs flagged as invalid
@@ -312,10 +313,9 @@ public class UrlValidatorTest extends TestCase {
 			   "http://a.b-c.de",
 			   "http://223.255.255.254"
 	   };
-	   Boolean expected = true;
 	   System.out.println("\nThe following VALID URLs fail the validator:");
 	   for (int i = 0; i < validUrls.length; i++) {
-		   if (urlVal.isValid(validUrls[i]) != expected) { 
+		   if (urlVal.isValid(validUrls[i]) != true) { 
 			   System.out.println("\"" + validUrls[i] + "\"");
 		   }
 	   }	
@@ -323,18 +323,35 @@ public class UrlValidatorTest extends TestCase {
 		
 	   //This will output failed tests for invalid URLs flagged as valid
 	   String invalidUrls[] = {
-			   "http://-a.b.co",
+			   
+			   //working on somewhat comprehensive test cases
+			   "http://-google.com",
+			   "http://google-.com",
+			   "http://google.-com",
+			   "http://google.com-",
+			   "http://-www.google.com",
+			   "http://www-.google.com",
+			   "http://ww^w.google.com",
+			   "http://googl^e.com",
+			   "http://google.co^m/",
+			   "http://google.com/goog^le",
+			   "http://ww w.google.com",
+			   "http://googl e.com",
+			   "http://google.co m/",
+			   "http://google.com/goog le",
 			   "http://",
 			   "http://.",
+			   "http://0.0",
+			   "http://0.0.0",
+			   "http://0.0.0.0.0",
+			   "http://0.0.0.-1",
+			   "http://0.0.0.256",
+			   
+			   
+			   
+			   "http://-a.b.co",
 			   "http://..",
 			   "http://../",
-			   "http://?",
-			   "http://??",
-			   "http://??/",
-			   "http://#",
-			   "http://##",
-			   "http://##/",
-			   "http://foo.bar?q=Spaces should be encoded",
 			   "//",
 			   "//a",
 			   "///a",
@@ -351,27 +368,18 @@ public class UrlValidatorTest extends TestCase {
 			   "http://a.b--c.de/",
 			   "http://-a.b.co",
 			   "http://a.b-.co",
-			   "http://0.0.0.0",
-			   "http://10.1.1.0",
-			   "http://10.1.1.255",
-			   "http://224.1.1.1",
-			   "http://1.1.1.1.1",
-			   "http://123.123.123",
-			   "http://3628126748",
 			   "http://.www.foo.bar/",
 			   "http://www.foo.bar./",
 			   "http://.www.foo.bar./",
-			   "http://10.1.1.1",
-			   "http://10.1.1.254"
 	   };
-	   expected = false;
 	   System.out.println("\nThe following INVALID URLs pass the validator:");
 	   for (int i = 0; i < invalidUrls.length; i++) {
-		   if (urlVal.isValid(invalidUrls[i]) != expected) { 
+		   if (urlVal.isValid(invalidUrls[i]) != false) { 
 			   System.out.println("\"" + invalidUrls[i] + "\"");
 		   }
 	   }
 	   System.out.println("\n");
+	   
    }
    /**
     * Create set of tests by taking the testUrlXXX arrays and
