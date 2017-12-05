@@ -267,51 +267,35 @@ public class UrlValidatorTest extends TestCase {
    }
    
    //programming based testing
+   /**
+    * Create set of tests by taking the testUrlXXX arrays and
+    * running through all possible permutations of their combinations.
+    *
+    * @param testObjects Used to create a url.
+    */
    public void testAnyOtherUnitTest()
    {
 	   //This will output failed tests for valid URLs flagged as invalid
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   String validUrls[] = {
 			   "http://www.amazon.com",
-			   "http://www.google.com",
-			   "https://www.amazon.com",
+			   "http://www.amazon.com:80",
+			   "http://ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.com",
+			   "http://ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.com",
+			   "http://ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.com/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+			   "http://a.com/",
+			   "http://a.com/a",
+			   "http://a.com/?a",
+			   "http://a.com/?",
+			   "https://oregonstate.instructure.com/",
+			   "https://oregonstate.instructure.com/courses/",
 			   "https://oregonstate.instructure.com/courses/1648345",
-			   "file:///Users/tim/Downloads/FinalProject%20(1).pdf",
-			   "http://foo.com/blah_blah",
+			   "https://oregonstate.instructure.com/courses/1648345?bar=baz",
+			   "https://oregonstate.instructure.com/courses/1_648345",
 			   "http://foo.com/blah_blah/",
 			   "http://foo.com/blah_blah_(wikipedia)",
 			   "http://foo.com/blah_blah_(wikipedia)_(again)",
 			   "http://www.example.com/wpstyle/?p=364",
-			   "https://www.example.com/foo/?bar=baz&inga=42&quux",
-			   "http://✪df.ws/123",
-			   "http://userid:password@example.com:8080",
-			   "http://userid:password@example.com:8080/",
-			   "http://userid@example.com",
-			   "http://userid@example.com/",
-			   "http://userid@example.com:8080",
-			   "http://userid@example.com:8080/",
-			   "http://userid:password@example.com",
-			   "http://userid:password@example.com/",
-			   "http://142.42.1.1/",
-			   "http://142.42.1.1:8080/",
-			   "http://➡.ws/䨹",
-			   "http://⌘.ws",
-			   "http://⌘.ws/",
-			   "http://foo.com/blah_(wikipedia)#cite-1",
-			   "http://foo.com/blah_(wikipedia)_blah#cite-1",
-			   "http://foo.com/unicode_(✪)_in_parens",
-			   "http://foo.com/(something)?after=parens",
-			   "http://☺.damowmow.com/",
-			   "http://code.google.com/events/#&product=browser",
-			   "http://j.mp",
-			   "ftp://foo.bar/baz",
-			   "http://foo.bar/?q=Test%20URL-encoded%20stuff",
-			   "http://مثال.إختبار",
-			   "http://例子.测试",
-			   "http://उदाहरण.परीक्षा",
-			   "http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com",
-			   "http://a.b-c.de",
-			   "http://223.255.255.254"
 	   };
 	   System.out.println("\nThe following VALID URLs fail the validator:");
 	   for (int i = 0; i < validUrls.length; i++) {
@@ -323,54 +307,41 @@ public class UrlValidatorTest extends TestCase {
 		
 	   //This will output failed tests for invalid URLs flagged as valid
 	   String invalidUrls[] = {
-			   
-			   //working on somewhat comprehensive test cases
-			   "http://-google.com",
-			   "http://google-.com",
-			   "http://google.-com",
-			   "http://google.com-",
-			   "http://-www.google.com",
-			   "http://www-.google.com",
-			   "http://ww^w.google.com",
-			   "http://googl^e.com",
-			   "http://google.co^m/",
-			   "http://google.com/goog^le",
-			   "http://ww w.google.com",
-			   "http://googl e.com",
-			   "http://google.co m/",
-			   "http://google.com/goog le",
-			   "http://",
-			   "http://.",
-			   "http://0.0",
-			   "http://0.0.0",
-			   "http://0.0.0.0.0",
-			   "http://0.0.0.-1",
-			   "http://0.0.0.256",
-			   
-			   
-			   
-			   "http://-a.b.co",
-			   "http://..",
-			   "http://../",
-			   "//",
-			   "//a",
-			   "///a",
-			   "///",
-			   "http:///a",
-			   "foo.com",
-			   "rdar://1234",
-			   "h://test",
-			   "http:// shouldfail.com",
-			   ":// should fail",
-			   "http://foo.bar/foo(bar)baz quux",
-			   "ftps://foo.bar/",
-			   "http://-error-.invalid/",
-			   "http://a.b--c.de/",
-			   "http://-a.b.co",
-			   "http://a.b-.co",
-			   "http://.www.foo.bar/",
-			   "http://www.foo.bar./",
-			   "http://.www.foo.bar./",
+			   "ht,tp://google.com", "ht$tp://google.com",
+			   "ht+tp://google.com", "ht=tp://google.com", 
+			   "ht&tp://google.com", "ht@tp://google.com",
+			   "ht:tp://google.com", "ht?tp://google.com", 
+			   "ht/tp://google.com", "ht;tp://google.com",
+			   "ht*tp://google.com", "http://goo,gle.com", 
+			   "http://goo$gle.com", "http://goo+gle.com",
+			   "http://goo=gle.com", "http://goo&gle.com",
+			   "http://goo@gle.com", "http://goo:gle.com",
+			   "http://goo?gle.com", "http://goo/gle.com",
+			   "http://goo;gle.com", "http://goo*gle.com",
+			   "http://google.co,m", "http://google.co$m",
+			   "http://google.co+m", "http://google.co=m", 
+			   "http://google.co&m", "http://google.co@m",
+			   "http://google.co:m", "http://google.co?m", 
+			   "http://google.co;m", "http://google.co*m",
+			   "http://google.co:-1", "http://google.co:65535",
+			   "http://google.co:a", "http://google.com:,", 
+			   "http://google.com:$", "http://google.com:+",
+			   "http://google.com:=", "http://google.com:&",
+			   "http://google.com:@", "http://google.com::",
+			   "http://google.com:?", "http://google.com:/",
+			   "http://google.com:;", "http://google.com:*",
+			   "http://-google.com", "http://google-.com",
+			   "http://google.-com", "http://google.com-",
+			   "http://-www.google.com", "http://www-.google.com",
+			   "http://ww^w.google.com", "http://googl^e.com",
+			   "http://google.co^m/", "http://google.com/goog^le",
+			   "http://ww w.google.com", "http://googl e.com",
+			   "http://google.co m/", "http://google.com/goog le",
+			   "http://", "http://.", "http://,", "http://$",
+			   "http://+", "http://=", "http://&", "http://@", 
+			   "http://:", "http://?", "http:///", "http://;",
+			   "http://*", "http://0.0", "http://0.0.0", 
+			   "http://0.0.0.0.0", "http://0.0.0.-1", "http://0.0.0.256"
 	   };
 	   System.out.println("\nThe following INVALID URLs pass the validator:");
 	   for (int i = 0; i < invalidUrls.length; i++) {
@@ -381,12 +352,4 @@ public class UrlValidatorTest extends TestCase {
 	   System.out.println("\n");
 	   
    }
-   /**
-    * Create set of tests by taking the testUrlXXX arrays and
-    * running through all possible permutations of their combinations.
-    *
-    * @param testObjects Used to create a url.
-    */
-   
-
 }
